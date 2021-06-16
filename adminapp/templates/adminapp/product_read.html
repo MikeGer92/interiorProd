@@ -17,7 +17,7 @@
             <p>{% if object.is_active %}да{% else %}нет{% endif %}</p>
             <p>
                 <button>
-                    <a href={% url 'admin:product_update' object.pk %}>редактировать</a>
+                    <a href="{% url 'admin:product_update' object.pk %}">редактировать</a>
                 </button>
             </p>
             <p>

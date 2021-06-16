@@ -262,6 +262,7 @@ html, body {
     float:left;
     margin: 25px;
     width: 150px;
+    height:100px;
     color: #111;
 }
 
@@ -1696,4 +1697,8 @@ td:first-child {
 }
 .related-products a:hover .text{
 	display: block;
+}
+.user_role button {
+    width: 140px;
+    height: 100%;
 }
