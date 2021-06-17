@@ -101,6 +101,7 @@ html, body {
 
 .products_list .new_product {
     margin-left: 150px;
+    height: 100%;
 }
 
 .products_list button {
@@ -636,7 +637,7 @@ html, body {
 
 .slider {
 	height: 800px;
-	background-image: url(/static/img/slider.jpg); 
+	background-image: url(/static/img/slider.jpg);
 	/*padding-left: 98px;*/
 	padding-left: 78px;
 	padding-right: 211px;
