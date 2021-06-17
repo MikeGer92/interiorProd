@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# load_dotenv(BASE_DIR / '.env') # для хранения переменных в продакшн проекте
 
 
 # Quick-start development settings - unsuitable for production
@@ -134,3 +138,26 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'authapp.ShopUser'
 
 LOGIN_URL = '/auth/login/'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'django@gb.ocal'
+EMAIL_HOST_PASSWORD = 'geekbrains'
+EMAIL_USE_SSL = False
+
+# python3 -m smtpd
+# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'tmp/emails'
+
+DOMAIN_NAME = 'http://localhost:8000'
+
+
+# EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_PORT = os.getenv('EMAIL_PORT')
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+
+
