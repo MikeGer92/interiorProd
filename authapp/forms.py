@@ -66,4 +66,16 @@ class ShopUserEditForm(UserChangeForm):
             field.help_text = ''
             if field_name == 'password':
                 field.widget = forms.HiddenInput()
+
+    def clean_age(self):
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError("Вы слишком молоды!")
+
+        return data
+
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if ShopUser.objects.filter(email=data).exists():
+            raise forms.ValidationError("Эта почта уже зарегестрированна")
     
