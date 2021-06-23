@@ -31,8 +31,10 @@ def save_user_profile(backend, user, response, *args, **kwargs):
             user.delete()
             raise AuthForbidden('social_core.backends.vk.VKOAuth2')
         user.age = age
+    user.avatar = vk_data['photo_max']
     if vk_data['photo_max']:
         user.shopuserprofile.user_photo = vk_data['photo_max']
+
     user.save()
 
 
