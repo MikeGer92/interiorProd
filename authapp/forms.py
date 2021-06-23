@@ -75,12 +75,6 @@ class ShopUserEditForm(UserChangeForm):
 
         return data
 
-    def clean_email(self):
-        data = self.cleaned_data['email']
-        if ShopUser.objects.filter(email=data).exists():
-            raise forms.ValidationError("Эта почта уже зарегестрированна")
-
-        return data
     
 class ShopUserProfileEditForm(forms.ModelForm):
     class Meta:
