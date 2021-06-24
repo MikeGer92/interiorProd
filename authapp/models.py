@@ -10,7 +10,7 @@ from django.utils.timezone import now
 
 class ShopUser(AbstractUser):
     avatar = models.ImageField(upload_to='users_avatars', blank=True)
-    age = models.PositiveIntegerField(verbose_name = 'возраст', blank=True)
+    age = models.PositiveIntegerField(verbose_name = 'возраст', default=18, blank=True)
     REQUIRED_FIELDS = ['email', 'age']
 
     activation_key = models.CharField(max_length=128, blank=True)
@@ -35,7 +35,6 @@ class ShopUserProfile(models.Model):
     tagline = models.CharField(verbose_name='теги', max_length=128, blank=True)
     about_me = models.TextField(verbose_name='о себе', max_length=512, blank=True)
     gender = models.CharField(verbose_name='пол', choices=GENDER_CHOICES,max_length=1, blank=True)
-    user_photo = models.ImageField(verbose_name='мой аватар', blank=True)
 
     @receiver(post_save, sender=ShopUser)
     def create_user_profile(sender, instance, created, **kwargs):
