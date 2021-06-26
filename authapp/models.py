@@ -9,9 +9,10 @@ from django.utils.timezone import now
 
 
 class ShopUser(AbstractUser):
-    avatar = models.ImageField(upload_to='users_avatars', blank=True)
+    # avatar = models.ImageField(upload_to='users_avatars', blank=True)
+    avatar = models.CharField(max_length=512, blank=True)
     age = models.PositiveIntegerField(verbose_name = 'возраст', default=18)
-    # REQUIRED_FIELDS = ['email', 'age']
+    REQUIRED_FIELDS = ['email', 'age']
 
     activation_key = models.CharField(max_length=128, blank=True)
     activation_key_created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
