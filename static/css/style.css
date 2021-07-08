@@ -1703,3 +1703,34 @@ td:first-child {
     width: 140px;
     height: 100%;
 }
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    align-items: center;
+    margin-top: 15px;
+
+}
+.dropdown-item {
+    display: none;
+    text-align:center
+
+}
+.dropdown:hover .dropdown-item{display:block;}
+
+.basket_orderlist {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+.order_productimage {
+    display: flex;
+    width: 270px;
+    height: 270px;
+}
+.basket_orderrecord {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px;
+    border: 2px solid grey
+}

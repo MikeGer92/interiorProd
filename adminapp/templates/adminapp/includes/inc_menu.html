@@ -11,4 +11,10 @@
             категории{% if category %}:<span>{{ category.name }}</span>{% endif %}
         </a>
     </li>
+        <li>
+        <a href="{% url 'admin:all_orders' %}"
+        class="orders_list">
+            заказы
+        </a>
+    </li>
 </ul>
