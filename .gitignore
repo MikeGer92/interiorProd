@@ -1,8 +1,12 @@
 .idea
+*.pyc
 __pycache__/
 media
 django_2.0
 django_2.2
 django_3
+venv
+env
 .env
+*.log
 tmp

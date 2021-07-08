@@ -1,0 +1,35 @@
+<div class="text-center h2 header">
+        Заказы клиентов
+    </div>
+    <table class="table">
+        <thead>
+           <th>ID</th>
+           <th>Создан</th>
+           <th>Обновлен</th>
+           <th>Статус</th>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+                <tr>
+                    <td>{{ item.pk }}</td>
+                    <td>{{ item.created|date:'d.m.Y H:i:s' }}</td>
+                    <td>{{ item.updated|date:'d.m.Y H:i:s'  }}</td>
+                    <td>{{ item.get_status_display }}</td>
+                    <td><a class="btn btn-link" href="{% url 'order:read' item.pk %}">Посмотреть</a> </td>
+                    <td>
+                        {% if item.status == 'FM' %}
+                            <td><a class="btn btn-link" href="{% url 'order:update' item.pk %}">Изменить</a> </td>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.status == 'FM' %}
+                            <td><a class="btn btn-link" href="{% url 'order:delete' item.pk %}">Удалить</a> </td>
+                        {% endif %}>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a class="btn btn-link" href="{% url 'main' %}">На главную</a>
+    </div>

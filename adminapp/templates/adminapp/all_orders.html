@@ -1,0 +1,27 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+     <div class="basket_orderlist">
+         {% for object in objects %}
+             <div class="basket_orderrecord {% if not object.is_active %}not_active{% endif %}">
+                 <table class="table">
+                     <thead>
+                        <th>ID</th>
+                        <th>Создан</th>
+                        <th>Обновлен</th>
+                        <th>Статус</th>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td>{{ object.pk }}</td>
+                             <td>{{ object.created|date:'d.m.Y H:i:s' }}</td>
+                             <td>{{ object.updated|date:'d.m.Y H:i:s'  }}</td>
+                             <td>{{ object.get_status_display }}</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+        {% endfor%}
+     </div>
+{% endblock %}
