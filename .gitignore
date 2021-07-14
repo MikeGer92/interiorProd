@@ -1,8 +1,6 @@
 .idea
 *.pyc
 __pycache__/
-db.sqlite3
-media
 django_2.0
 django_2.2
 django_3
