@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from mainapp.models import Product
+from django.utils.functional import cached_property
 
 # способ работы с остатками через менеджера
 class BasketQuerySet(models.QuerySet):
@@ -29,10 +30,16 @@ class Basket(models.Model):
     
     product_cost = property(_get_product_cost)
     
-    
+    @cached_property
+    def get_items_cached(self):
+        return Basket.objects.filter(user=self.user).select_related()
+
+
+
     def _get_total_quantity(self):
         "return total quantity for user"
-        _items = Basket.objects.filter(user=self.user)
+        # _items = Basket.objects.filter(user=self.user)
+        _items = self.get_items_cached
         _totalquantity = sum(list(map(lambda x: x.quantity, _items)))
         return _totalquantity
         
@@ -41,7 +48,8 @@ class Basket(models.Model):
     
     def _get_total_cost(self):
         "return total cost for user"
-        _items = Basket.objects.filter(user=self.user)
+        # _items = Basket.objects.filter(user=self.user)
+        _items = self.get_items_cached
         _totalcost = sum(list(map(lambda x: x.product_cost, _items)))
         return _totalcost
         
@@ -49,7 +57,7 @@ class Basket(models.Model):
 
     @staticmethod
     def get_items(user):
-        return Basket.objects.filter(user=user).order_by('product_category')
+        return Basket.objects.filter(user=user).select_related().order_by('product_category')
 
     @staticmethod
     def get_product(user, product):
