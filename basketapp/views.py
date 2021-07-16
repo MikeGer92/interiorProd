@@ -12,7 +12,7 @@ from django.http import JsonResponse
 def basket(request):
     title = 'корзина'
     
-    basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+    basket_items = Basket.objects.filter(user=request.user).select_related().order_by('product__category')
     
     content = {
         'title': title,
