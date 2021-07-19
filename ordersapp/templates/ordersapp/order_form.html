@@ -32,7 +32,6 @@
                                {% if field.name == 'price' %}
                                {% if field.value %}
                                    <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
-
                                        {{ field.value|default:"" }}
                                    </span> руб.
                                {% endif %}

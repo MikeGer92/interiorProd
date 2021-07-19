@@ -32,7 +32,7 @@ class Basket(models.Model):
     
     @cached_property
     def get_items_cached(self):
-        return Basket.objects.filter(user=self.user).select_related()
+        return self.user.basket.select_related()
 
 
 
@@ -57,7 +57,8 @@ class Basket(models.Model):
 
     @staticmethod
     def get_items(user):
-        return Basket.objects.filter(user=user).select_related().order_by('product_category')
+        # return Basket.objects.filter(user=user).select_related().order_by('product_category')
+        return user.basket.select_related().order_by('product_category')
 
     @staticmethod
     def get_product(user, product):
