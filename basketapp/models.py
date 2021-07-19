@@ -18,7 +18,7 @@ class BasketQuerySet(models.QuerySet):
 class Basket(models.Model):
     objects = BasketQuerySet.as_manager()
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='basket')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='количество', default=0)
     add_datetime = models.DateTimeField(verbose_name='время добавления', auto_now_add=True)
@@ -32,7 +32,7 @@ class Basket(models.Model):
     
     @cached_property
     def get_items_cached(self):
-        return self.user.basket.select_related()
+        return Basket.objects.filter(user=self.user).select_related()
 
 
 
@@ -57,8 +57,7 @@ class Basket(models.Model):
 
     @staticmethod
     def get_items(user):
-        # return Basket.objects.filter(user=user).select_related().order_by('product_category')
-        return user.basket.select_related().order_by('product_category')
+        return Basket.objects.filter(user=user).select_related().order_by('product_category')
 
     @staticmethod
     def get_product(user, product):

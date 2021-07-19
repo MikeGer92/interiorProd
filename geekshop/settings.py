@@ -180,6 +180,20 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+if os.name == 'posix':
+   CACHE_MIDDLEWARE_ALIAS = 'default'
+   CACHE_MIDDLEWARE_SECONDS = 120
+   CACHE_MIDDLEWARE_KEY_PREFIX = 'geekshop'
+
+   CACHES = {
+       'default': {
+           'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+           'LOCATION': '127.0.0.1:11211',
+       }
+   }
+
+LOW_CACHE = True
+
 AUTH_USER_MODEL = 'authapp.ShopUser'
 
 LOGIN_URL = '/auth/login/'
@@ -217,20 +231,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
-
-if os.name == 'posix':
-   CACHE_MIDDLEWARE_ALIAS = 'default'
-   CACHE_MIDDLEWARE_SECONDS = 120
-   CACHE_MIDDLEWARE_KEY_PREFIX = 'geekshop'
-
-   CACHES = {
-       'default': {
-           'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-           'LOCATION': '127.0.0.1:11211',
-       }
-   }
-
-LOW_CACHE = True
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7885096'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'fsSxmdS9jfVOj5xzmEOE'
