@@ -1,7 +1,7 @@
 import datetime, random, os, json
 from django.shortcuts import render, get_object_or_404
 from mainapp.models import ProductCategory, Product
-
+from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
 from django.core.cache import cache
@@ -118,7 +118,7 @@ def main(request):
     
     return render(request, 'mainapp/index.html', content)
     
-
+@cache_page(3600)
 def products(request, pk=None, page=1):   
     title = 'продукты'
     # links_menu = ProductCategory.objects.filter(is_active=True)
@@ -198,5 +198,5 @@ def contact(request):
         'locations': locations,
     }
     return render(request, 'mainapp/contact.html', content)
-    
-    
+
+
